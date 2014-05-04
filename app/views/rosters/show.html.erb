@@ -1,0 +1,10 @@
+<% provide(:title, 'Roster') %>
+<h1>Roster</h1>
+<div class="rosters">
+<% @users.each do |u| %>
+	<li><%= link_to u.name, user_path(u.id) %> 
+	| <%= link_to "Remove", removeuser_roster_path(u.id), method: :post	%></li>
+<% end %>
+</div>
+
+			

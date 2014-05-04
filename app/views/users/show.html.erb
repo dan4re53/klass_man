@@ -1,11 +1,31 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-	<aside class="span4">
+	<aside class="span9">
 		<section>
 			<h1>
 				<%= gravatar_for @user %>
 				<%= @user.name %>
 			</h1>
+			<% if !@user.roster_id.nil? %>
+				<%= @user.grade %>th grade		
+				<% r = Roster.find_by(params[:user_id]) %>
+				| <%= link_to r.user.name, r %>
+			<% elsif !@user.admin? %>
+				<%= @user.grade %>th grade	
+				| <%= "#{@user.name} currently does not belong to a class."%>
+			<% elsif @user.admin? %>
+				<%= link_to "Roster", roster_path(@user) %>
+			<% end %>
 		</section>
 	</aside>
+
 </div>
+
+<p>Contact Info</p>
+
+<p>Phone: 
+	<% unless @user.phone.nil? %>
+	(<%=  @user.phone.to_s[0..2] %>)<%= @user.phone.to_s[3..5]%>-<%= @user.phone.to_s[6..9]%> </p>
+	<% end %>
+<p>Email: <%= @user.email %></p>
+			<%= button_to "Edit Contact Info", edit_contact_user_path(@user.id), method: :get %>

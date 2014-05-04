@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211003138) do
+ActiveRecord::Schema.define(version: 20140403230435) do
+
+  create_table "attendances", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "date"
+    t.boolean  "service"
+    t.boolean  "sundayschool"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rosters", force: true do |t|
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -21,6 +37,9 @@ ActiveRecord::Schema.define(version: 20140211003138) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
+    t.integer  "roster_id"
+    t.integer  "grade"
+    t.integer  "phone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

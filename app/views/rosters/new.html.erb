@@ -1,0 +1,19 @@
+<% provide(:title, 'New Roster') %>
+<h1>Create New Roster</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@roster) do |f| %>
+		
+			<%= f.label :description %>
+			<%= f.text_field :description %>
+		
+			<% User.where(admin: "f", roster_id: nil).each do |user| %>
+				<p><%= check_box_tag 'ids[]', user.id %>
+				<%= user.name %></p>
+			<% end %>
+
+			<%= f.submit "Create Roster", class: "btn btn-large btn-primary" %>
+		<% end %>
+	</div>
+</div>

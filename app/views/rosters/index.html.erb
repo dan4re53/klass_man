@@ -1,0 +1,9 @@
+<% provide(:title, 'All Rosters') %>
+<h1>List of All Rosters</h1> 
+<div class="rosters">
+<h1><%= button_to "Create New Roster", new_roster_path, method: :get %></h1>
+<% @admin_roster.each do |roster| %>
+	<li><%= link_to roster.name, roster_path(roster.id) %></li>
+<% end %>
+</div>
+

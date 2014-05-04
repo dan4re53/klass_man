@@ -1,8 +1,29 @@
 <li>
 	<%= gravatar_for user, size: 52 %>
+	
 	<%= link_to user.name, user %>
-	<% if current_user.admin? && !current_user?(user) %>
-			<%= link_to "delete", user, method: :delete,
-																	data: { confirm: "Are you sure?" } %>
+	<% if user.grade? %>
+		| <%= user.grade%>th grade
 	<% end %>
+	
+	<% if !user.roster_id.nil? %>
+		| <%= link_to user.roster.user.name, roster_path(user.roster) %>
+	<% end %>
+	
+
+	
+	<div class="pull-right">
+
+	
+	<% if current_user.admin? && !current_user?(user) && !current_user.rosters.empty? && user.roster_id != current_user.id && !user.admin? %>
+		<%= link_to "Add to Roster", adduser_roster_path(user), method: :post %> |
+	<% end %>
+	
+	<% if current_user.admin? && !current_user?(user) %>
+		<%= link_to "Delete", user, method: :delete,
+																	data: { confirm: "Are you sure?" } %></div>
+														
+	<% end %>
+		
+
 </li>

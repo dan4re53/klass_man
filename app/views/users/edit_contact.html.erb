@@ -1,0 +1,28 @@
+<% provide(:title, 'Edit Contact Info') %>
+<h1>Update Contact Info</h1>
+
+<div class="row">
+	<div class="span3 offset3">
+		<%= form_for(@user) url: update_contact_user_path, method: :patch do |f| %>
+			<%= render 'shared/error_messages' %>
+
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+			
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+
+			<%= f.label :grade %>
+			<%= f.select( :grade, (9..12), {prompt: "Select Grade"}) %>
+	
+			<%= f.label :phone %>
+			<%= f.number_field :phone %>
+	
+			<%= f.label :name, "Teacher" %>
+			<%= collection_select(:user, :roster_id, User.all.where(admin: "t"), :id, :name, 
+			{prompt: "Select Teacher"}) %>
+			
+			<%= f.submit "Save changes", class: "btn btn-medium btn-primary" %>
+		<% end %>
+	</div>
+</div>

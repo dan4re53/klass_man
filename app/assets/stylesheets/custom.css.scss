@@ -185,4 +185,29 @@ input {
 			border-bottom: 1px solid $grayLighter;
 		}
 	}
+	p {
+		float: right;
+	}
+}
+
+.rosters {
+	list-style: none;
+	margin: 0;
+	li {
+		overflow: auto;
+		padding: 10px 0;
+		border-top: 1px solid $grayLighter;
+		&:last-child {
+			border-bottom: 1px solid $grayLighter;
+		}
+	p {
+		float: right;
+	}
+	}
+	h1 {
+		font-size: 1.8em;
+		text-align: left;
+		letter-spacing: -1px;
+		font-weight: normal;
+	}
 }

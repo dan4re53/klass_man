@@ -1,13 +1,31 @@
 KlassMan::Application.routes.draw do
+  resources :rosters do
+    member do
+      post 'adduser'
+      post 'removeuser'
+    end
+  end
+  
+  resources :users do
+    member do
+      patch 'update_contact'
+      get 'edit_contact'
+    end
+  end  
+  
+  resources :attendances
   resources :users  
   resources :sessions, only: [:new, :create, :destroy]
   root 'static_pages#home'
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-  match '/help',    to: 'static_pages#help',    via: 'get'
-  match '/about',   to: 'static_pages#about',   via: 'get'
-  match '/contact', to: 'static_pages#contact', via: 'get'
+  #match '/update_student',  to: 'users#update_student', via: 'get'
+  match '/addstudent',  to: 'users#admin_add',      via: 'get'
+  match '/createstudent', to: 'users#admin_create', via: 'post'
+  match '/signup',      to: 'users#new',            via: 'get'
+  match '/signin',      to: 'sessions#new',         via: 'get'
+  match '/signout',     to: 'sessions#destroy',     via: 'delete'
+  match '/help',        to: 'static_pages#help',    via: 'get'
+  match '/about',       to: 'static_pages#about',   via: 'get'
+  match '/contact',     to: 'static_pages#contact', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
